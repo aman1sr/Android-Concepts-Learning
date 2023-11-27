@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
+import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -26,7 +27,16 @@ class MainActivity : AppCompatActivity() {
         binding.daggerBasics2.setOnClickListener {
             runDaggerDemo2()
         }
+        binding.permission.setOnClickListener {
+            checkSimplePermission()
+        }
 
+    }
+
+    private fun checkSimplePermission() {
+        intent = Intent(this, PermissionActivity::class.java)
+        intent.putExtra("type","single")
+        startActivity(intent)
     }
 
     private fun runDaggerDemo() {

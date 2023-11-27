@@ -33,6 +33,14 @@
 
                 android:text="Dagger: Cheezy Code" />
 
+            <Button
+                android:id="@+id/permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+
+                android:text="Simple Camera" />
+
         </LinearLayout>
     </ScrollView>
 
