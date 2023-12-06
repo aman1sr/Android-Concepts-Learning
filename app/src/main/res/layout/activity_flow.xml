@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".flow.FlowActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/startEndParentMargin"
+        android:layout_marginEnd="@dimen/startEndParentMargin"
+        >
+
+
+    <Button
+        android:id="@+id/basicFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="basic Flow Test" />
+
+    <Button
+        android:id="@+id/multipleFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="multiple Flow Test" />
+
+
+    <Button
+        android:id="@+id/cancelFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="Cancel the Flow at 2500milli" />
+
+
+    <Button
+        android:id="@+id/actionFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="Actions in Flow" />
+
+
+    <Button
+        android:id="@+id/terminalOperatorFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="terminal Operator in Flow" />
+
+
+    <Button
+        android:id="@+id/nonTerminalOperatorFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="NON terminal Operator in Flow" />
+
+
+    <Button
+        android:id="@+id/filteredDataClassFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="filtered Data Class in Flow" />
+
+   <Button
+        android:id="@+id/bufferFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="buffer in Flow" />
+
+   <Button
+        android:id="@+id/upStreamFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="upStream in Flow" />
+
+   <Button
+        android:id="@+id/exceptionHandlingFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="exception Handling in Flow" />
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

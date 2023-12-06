@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
+import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,15 @@ class MainActivity : AppCompatActivity() {
         binding.permission.setOnClickListener {
             checkSimplePermission()
         }
+        binding.flow.setOnClickListener {
+            checkFlowConcept()
+        }
 
+    }
+
+    private fun checkFlowConcept() {
+        intent = Intent(this, FlowActivity::class.java)
+        startActivity(intent)
     }
 
     private fun checkSimplePermission() {
