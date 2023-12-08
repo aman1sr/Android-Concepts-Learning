@@ -3,12 +3,14 @@ package com.petofy.androidarchdemoprojects.flow
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityFlowBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.catch
@@ -74,13 +76,101 @@ class FlowActivity : AppCompatActivity() {
             exceptionHandling()
         }
 
+        binding.hotSharedFlow.setOnClickListener {
+            hotSharedFlowEx()
+        }
+
+        binding.hotStateFlow.setOnClickListener {
+            hotStateFlowEx()
+        }
 
 
 
 
 
+    }
+
+    private fun hotStateFlowEx() {
+        GlobalScope.launch {
+            val result = stateFlowProducer()
+            delay(1500)
+            result.collect{
+                Log.d(TAG, "CollectedFlowItem: $it")
+//                Log.d(TAG, "result: ${result.value}")     // can't access the MutableStateFlow def value, becuase return type is Flow<Int>
+            }
+        }
+
+            GlobalScope.launch {
+            val result = stateFlowProducer2()
+            delay(1500)
+            result.collect{
+                Log.d(TAG, "CollectedStateFlowItem: $it")
+                Log.d(TAG, "result: ${result.value}")     // could access the StateFlow value, becuase, return type is StateFlow<Int>
+            }
+        }
 
 
+    }
+
+    private fun hotSharedFlowEx() {
+        GlobalScope.launch {
+            val result = sharedFlowProducer()
+            result.collect {
+                Log.d(TAG, "item: $it")
+            }
+        }
+
+        //  here becuase added replay(1) in sharedFlowProducer() below coroutine will get 1 skipped item extra
+        GlobalScope.launch {
+            val result = sharedFlowProducer()
+            delay(2500)
+            result.collect {
+                Log.d(TAG, "item2: $it")
+            }
+        }
+    }
+
+    /*
+    * Hot in nature (like threater)
+    * */
+    private fun sharedFlowProducer(): Flow<Int> {
+        val mutableSharedFlow = MutableSharedFlow<Int>(1)       // adding a replay(1) will store 1 item in buffer such that the delayed customer will get 1 extra skipped item
+        GlobalScope.launch {
+            val list = listOf<Int>(1, 2, 3, 4, 5)
+            list.forEach {
+                mutableSharedFlow.emit(it)
+                delay(1000)
+            }
+        }
+        return mutableSharedFlow
+    }
+
+    /*
+    * State Flow are also hot in nature, where it's last state is saved as single buffer
+    * */
+    private fun stateFlowProducer(): Flow<Int> {
+        val mutableStateFlow = MutableStateFlow(10)
+        GlobalScope.launch {
+            delay(2000)
+            mutableStateFlow.emit(20)
+            delay(2000)
+            mutableStateFlow.emit(30)
+        }
+        return mutableStateFlow
+    }
+
+    /*
+    * return type: StateFlow   therefore could acces the def value also
+    * */
+    private fun stateFlowProducer2(): StateFlow<Int> {
+        val mutableStateFlow = MutableStateFlow(10)
+        GlobalScope.launch {
+            delay(2000)
+            mutableStateFlow.emit(20)
+            delay(2000)
+            mutableStateFlow.emit(30)
+        }
+        return mutableStateFlow
     }
 
     private fun exceptionHandling() {

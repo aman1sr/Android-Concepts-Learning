@@ -103,6 +103,20 @@
         android:layout_marginTop="@dimen/btn_margin_top"
 
         android:text="exception Handling in Flow" />
+   <Button
+        android:id="@+id/hotSharedFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="Hot Shared in Flow" />
+   <Button
+        android:id="@+id/hotStateFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btn_margin_top"
+
+        android:text="Hot State in Flow" />
 
 
 
