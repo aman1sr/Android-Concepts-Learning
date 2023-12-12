@@ -3,6 +3,7 @@ package com.petofy.androidarchdemoprojects
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
@@ -34,7 +35,15 @@ class MainActivity : AppCompatActivity() {
         binding.flow.setOnClickListener {
             checkFlowConcept()
         }
+        binding.arCore.setOnClickListener {
+            checkARCoreConcept()
+        }
 
+    }
+
+    private fun checkARCoreConcept() {
+        intent = Intent(this, ARCoreActivity::class.java)
+        startActivity(intent)
     }
 
     private fun checkFlowConcept() {
