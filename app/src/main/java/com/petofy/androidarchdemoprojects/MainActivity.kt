@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding.permission.setOnClickListener {
             checkSimpleCameraPermission()
         }
+        binding.permission2.setOnClickListener {
+            checkCameraLocationPermission()
+        }
         binding.flow.setOnClickListener {
             checkFlowConcept()
         }
@@ -39,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     private fun checkARCoreConcept() {
         intent = Intent(this, ARCoreActivity::class.java)
@@ -49,7 +54,11 @@ class MainActivity : AppCompatActivity() {
         intent = Intent(this, FlowActivity::class.java)
         startActivity(intent)
     }
-
+    private fun checkCameraLocationPermission() {
+        intent = Intent(this, PermissionActivity::class.java)
+        intent.putExtra("type","double")
+        startActivity(intent)
+    }
     private fun checkSimpleCameraPermission() {
         intent = Intent(this, PermissionActivity::class.java)
         intent.putExtra("type","single")

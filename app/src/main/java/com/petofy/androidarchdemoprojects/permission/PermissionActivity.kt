@@ -3,6 +3,7 @@ package com.petofy.androidarchdemoprojects.permission
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.ar.core.codelabs.hellogeospatial.helpers.GeoPermissionsHelper
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.helper.CameraPermissionHelper
 
@@ -16,7 +17,19 @@ class PermissionActivity : AppCompatActivity() {
         intent?.let {
             when (it.toString()) {
                 "single" -> {
-                    checkSinglePermission()
+                    Toast.makeText(this, "Single Permission", Toast.LENGTH_SHORT).show()
+                    if (!CameraPermissionHelper.hasCameraPermission(this)) {
+                        CameraPermissionHelper.requestCameraPermission(this);
+                        return;
+                    }
+                }
+                "double"-> {
+                    Toast.makeText(this, "double Permission", Toast.LENGTH_SHORT).show()
+                    if (!GeoPermissionsHelper.hasGeoPermissions(this)) {
+                        GeoPermissionsHelper.requestPermissions(this);
+                        return;
+                    }
+
                 }
             else ->  Toast.makeText(this, "Invalid stuff..", Toast.LENGTH_SHORT).show()
 
@@ -26,14 +39,7 @@ class PermissionActivity : AppCompatActivity() {
     }
 
     private fun checkSinglePermission() {
-        Toast.makeText(this, "Single Permission", Toast.LENGTH_SHORT).show()
 
-        // ARCore requires camera permissions to operate. If we did not yet obtain runtime
-        // permission on Android M and above, now is a good time to ask the user for it.
-        if (!CameraPermissionHelper.hasCameraPermission(this)) {
-            CameraPermissionHelper.requestCameraPermission(this);
-            return;
-        }
     }
 
 
