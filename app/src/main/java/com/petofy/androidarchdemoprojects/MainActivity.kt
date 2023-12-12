@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
         }

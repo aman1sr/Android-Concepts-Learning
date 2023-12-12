@@ -9,8 +9,10 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.ar.core.codelabs.hellogeospatial.helpers.GeoPermissionsHelper
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityArcoreBinding
+import com.petofy.androidarchdemoprojects.helper.CameraPermissionHelper
 
 class ARCoreActivity : AppCompatActivity() {
 
@@ -26,15 +28,24 @@ class ARCoreActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        checkCameraLocationPermission()
+
         binding.btnGetLastLocation.setOnClickListener {
             getLastLocation()
+        }
+    }
+
+    private fun checkCameraLocationPermission() {
+        if (!GeoPermissionsHelper.hasGeoPermissions(this)) {
+            GeoPermissionsHelper.requestPermissions(this);
+            return;
         }
     }
 
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location -> // todo; grant the location by def
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             var latitude = 0.0
             var longitude = 0.0
 
@@ -51,7 +62,7 @@ class ARCoreActivity : AppCompatActivity() {
     }
 
     private fun checkVPsAvailabitlity(latitude: Double, longitude: Double) {
-        Log.d(TAG, "checkVPsAvailabitlity: ")
+        Log.d(TAG, "location: $latitude , $longitude")
 
     }
 }
