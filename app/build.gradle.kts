@@ -39,6 +39,10 @@ buildFeatures{
 }
 
 dependencies {
+    // ARCore (Google Play Services for AR) library.
+    implementation ("com.google.ar:core:1.40.0")
+    implementation ("com.google.android.gms:play-services-location:19.0.1")
+    implementation ("com.google.android.gms:play-services-auth:19.0.0")
 
     implementation ("com.google.dagger:dagger:2.48")
     kapt ("com.google.dagger:dagger-compiler:2.48")

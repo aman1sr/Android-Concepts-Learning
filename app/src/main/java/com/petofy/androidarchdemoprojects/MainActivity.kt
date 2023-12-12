@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             runDaggerDemo2()
         }
         binding.permission.setOnClickListener {
-            checkSimplePermission()
+            checkSimpleCameraPermission()
         }
         binding.flow.setOnClickListener {
             checkFlowConcept()
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun checkSimplePermission() {
+    private fun checkSimpleCameraPermission() {
         intent = Intent(this, PermissionActivity::class.java)
         intent.putExtra("type","single")
         startActivity(intent)

@@ -19,12 +19,12 @@
 
 
     <Button
-        android:id="@+id/test"
+        android:id="@+id/btnGetLastLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_top"
 
-        android:text="..." />
+        android:text="Get Last Location" />
     </LinearLayout>
     </ScrollView>
 
