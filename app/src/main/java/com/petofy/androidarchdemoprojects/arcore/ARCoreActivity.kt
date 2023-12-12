@@ -29,7 +29,6 @@ class ARCoreActivity : AppCompatActivity() {
         binding.btnGetLastLocation.setOnClickListener {
             getLastLocation()
         }
-
     }
 
     @SuppressLint("MissingPermission")
