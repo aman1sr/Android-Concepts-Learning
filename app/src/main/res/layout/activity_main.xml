@@ -62,6 +62,13 @@
                 android:layout_marginTop="@dimen/btn_margin_top"
 
                 android:text="ARCore:::" />
+            <Button
+                android:id="@+id/lambda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+
+                android:text="lambda vs interface" />
 
         </LinearLayout>
     </ScrollView>

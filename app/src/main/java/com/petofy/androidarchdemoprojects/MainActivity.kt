@@ -8,6 +8,7 @@ import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActi
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
+import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 
 class MainActivity : AppCompatActivity() {
@@ -38,17 +39,15 @@ class MainActivity : AppCompatActivity() {
             checkFlowConcept()
         }
         binding.arCore.setOnClickListener {
-            checkARCoreConcept()
+            startScreen(ARCoreActivity::class.java)
+        }
+        binding.lambda.setOnClickListener {
+            startScreen(RecHomeActivity::class.java)
         }
 
     }
 
 
-
-    private fun checkARCoreConcept() {
-        intent = Intent(this, ARCoreActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun checkFlowConcept() {
         intent = Intent(this, FlowActivity::class.java)
@@ -71,6 +70,10 @@ class MainActivity : AppCompatActivity() {
     }
     private fun runDaggerDemo2() {
         intent = Intent(this, DaggerCheezyCodeActivity::class.java)
+        startActivity(intent)
+    }
+    fun startScreen(className: Class<*>) {
+        val intent = Intent(this, className)
         startActivity(intent)
     }
 }
