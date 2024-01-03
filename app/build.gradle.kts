@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -39,12 +40,21 @@ buildFeatures{
 }
 
 dependencies {
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
+
     // ARCore (Google Play Services for AR) library.
     implementation ("com.google.ar:core:1.40.0")
     implementation ("com.google.android.gms:play-services-location:19.0.1")
     implementation ("com.google.android.gms:play-services-auth:19.0.0")
 
     implementation ("com.google.dagger:dagger:2.48")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
     kapt ("com.google.dagger:dagger-compiler:2.48")
 
     implementation("androidx.core:core-ktx:1.9.0")

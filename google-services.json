@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678918424760",
+    "project_id": "androidarchdemo",
+    "storage_bucket": "androidarchdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678918424760:android:340a774256b0d58c9f4c4d",
+        "android_client_info": {
+          "package_name": "com.petofy.androidarchdemoprojects"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXdh0cu5-WhZJyK_tZd8s0617V3ROXmXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
