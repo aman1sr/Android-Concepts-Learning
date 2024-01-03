@@ -7,6 +7,7 @@ import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
+import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.lambda.setOnClickListener {
             startScreen(RecHomeActivity::class.java)
+        }
+        binding.firebase.setOnClickListener {
+            startScreen(FirebaseActivity::class.java)
         }
 
     }
