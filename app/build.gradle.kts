@@ -39,6 +39,8 @@ buildFeatures{
 }
 
 dependencies {
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+
     // ARCore (Google Play Services for AR) library.
     implementation ("com.google.ar:core:1.40.0")
     implementation ("com.google.android.gms:play-services-location:19.0.1")
