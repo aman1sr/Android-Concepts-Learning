@@ -11,6 +11,7 @@ import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
+import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.webView.setOnClickListener {
+            startScreen(HomeWebViewActivity::class.java)
+        }
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
         }
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         binding.firebase.setOnClickListener {
             startScreen(FirebaseActivity::class.java)
         }
+
 
     }
 
