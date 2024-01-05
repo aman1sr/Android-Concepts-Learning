@@ -1,8 +1,12 @@
 package com.petofy.androidarchdemoprojects
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
@@ -15,9 +19,16 @@ import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
     companion object{
-        val TAG= "HOME_SCREEN_ARCH_d"
+       private val TAG= "HOME_SCREEN_ARCH_d"
+        private val WEBVIEW_REQUEST_CODE = 101
+        val INTENT_WEBVIEW_KEY = "INTENT_WEBVIEW_KEY"
     }
-
+val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+    if (result.resultCode == Activity.RESULT_OK) {
+        val quizzReturnData = result.data?.getStringExtra(INTENT_WEBVIEW_KEY)
+        Log.d(TAG, "quizzReturnData:$quizzReturnData ")
+    }
+}
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +37,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.webView.setOnClickListener {
-            startScreen(HomeWebViewActivity::class.java)
+            intent = Intent(this, HomeWebViewActivity::class.java)
+            openHomeWebView.launch(intent)
         }
+
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
         }
@@ -85,4 +98,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, className)
         startActivity(intent)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
