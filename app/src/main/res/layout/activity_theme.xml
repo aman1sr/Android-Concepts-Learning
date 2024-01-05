@@ -40,4 +40,14 @@
         android:contentDescription="@string/email_icon"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:text="DarkMode" />
+
+
 </LinearLayout>
