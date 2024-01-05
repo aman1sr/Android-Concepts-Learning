@@ -15,6 +15,7 @@ import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
+import com.petofy.androidarchdemoprojects.theme.ThemeActivity
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,9 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
 
         setContentView(binding.root)
 
+        binding.theme.setOnClickListener {
+          startScreen(ThemeActivity::class.java)
+        }
         binding.webView.setOnClickListener {
             intent = Intent(this, HomeWebViewActivity::class.java)
             openHomeWebView.launch(intent)
