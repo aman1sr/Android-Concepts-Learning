@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityThemeBinding
 
+/*
+* codeLab: (https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme?hl=en&authuser=0#2)
+* */
 class ThemeActivity : AppCompatActivity() {
     lateinit var binding: ActivityThemeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
