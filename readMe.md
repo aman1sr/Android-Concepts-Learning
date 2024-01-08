@@ -9,3 +9,6 @@
 
 ### make some beautiful UI movieApp Screen (contraintLayout + Motion UI)
 - (https://blog.codemagic.io/designing-complex-ui-using-android-constraintlayout/)
+
+## recylerView -> ListAdapter  
+- 101, with viewBinding & Databinding

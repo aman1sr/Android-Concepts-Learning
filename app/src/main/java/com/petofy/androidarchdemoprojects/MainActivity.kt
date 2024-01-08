@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.firebase.setOnClickListener {
+            startScreen(FirebaseActivity::class.java)
+        }
         binding.webView.setOnClickListener {
             startScreen(HomeWebViewActivity::class.java)
         }
@@ -49,9 +52,7 @@ class MainActivity : AppCompatActivity() {
         binding.lambda.setOnClickListener {
             startScreen(RecHomeActivity::class.java)
         }
-        binding.firebase.setOnClickListener {
-            startScreen(FirebaseActivity::class.java)
-        }
+
 
 
     }
