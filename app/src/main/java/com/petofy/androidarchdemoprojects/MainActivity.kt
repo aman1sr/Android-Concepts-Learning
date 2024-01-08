@@ -11,6 +11,7 @@ import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
+import com.petofy.androidarchdemoprojects.dialog.DialogActivity
 import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
@@ -44,7 +45,9 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
             intent = Intent(this, HomeWebViewActivity::class.java)
             openHomeWebView.launch(intent)
         }
-
+        binding.dialog.setOnClickListener {
+            startScreen(DialogActivity::class.java)
+        }
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
         }
