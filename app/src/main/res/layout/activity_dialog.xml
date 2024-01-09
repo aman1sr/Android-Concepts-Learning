@@ -13,7 +13,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="67dp"
         android:layout_marginTop="76dp"
-        android:text="Dialog Frg"
+        android:text="BASIC Dialog Frg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_custom_dialog_frg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="CUSTOM dialog Frg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_dialog_frg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

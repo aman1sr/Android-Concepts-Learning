@@ -17,6 +17,13 @@ class DialogActivity : AppCompatActivity() {
             showAlertDialogFrg()
         }
 
+        binding.btnCustomDialogFrg.setOnClickListener {
+            showCustomDialogFrg()       // todo: CustomDialog Frg
+        }
+    }
+
+    private fun showCustomDialogFrg() {
+
     }
 
     /*
