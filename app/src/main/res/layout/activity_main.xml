@@ -92,6 +92,7 @@
                 android:layout_marginTop="@dimen/btn_margin_top"
 
                 android:text="lambda vs interface" />
+
             <Button
                 android:id="@+id/firebase"
                 android:layout_width="match_parent"

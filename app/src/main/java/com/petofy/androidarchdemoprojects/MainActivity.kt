@@ -12,11 +12,13 @@ import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActi
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
 import com.petofy.androidarchdemoprojects.dialog.DialogActivity
-import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
+import com.petofy.androidarchdemoprojects.theme.ThemeActivity
+import com.petofy.androidarchdemoprojects.firebase.FirebaseAuthActivity
+import com.petofy.androidarchdemoprojects.firebase.FirebaseHomeActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
-import com.petofy.androidarchdemoprojects.theme.ThemeActivity
+import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -39,14 +41,20 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
         setContentView(binding.root)
 
         binding.theme.setOnClickListener {
-          startScreen(ThemeActivity::class.java)
+          startScreen(this,ThemeActivity::class.java)
         }
         binding.webView.setOnClickListener {
             intent = Intent(this, HomeWebViewActivity::class.java)
             openHomeWebView.launch(intent)
         }
         binding.dialog.setOnClickListener {
-            startScreen(DialogActivity::class.java)
+            startScreen(this,DialogActivity::class.java)
+        }
+        binding.firebase.setOnClickListener {
+            startScreen(this,FirebaseHomeActivity::class.java)
+        }
+        binding.webView.setOnClickListener {
+            startScreen(this,HomeWebViewActivity::class.java)
         }
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
@@ -64,13 +72,10 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
             checkFlowConcept()
         }
         binding.arCore.setOnClickListener {
-            startScreen(ARCoreActivity::class.java)
+            startScreen(this,ARCoreActivity::class.java)
         }
         binding.lambda.setOnClickListener {
-            startScreen(RecHomeActivity::class.java)
-        }
-        binding.firebase.setOnClickListener {
-            startScreen(FirebaseActivity::class.java)
+            startScreen(this,RecHomeActivity::class.java)
         }
 
 
@@ -92,7 +97,6 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
         intent.putExtra("type","single")
         startActivity(intent)
     }
-
     private fun runDaggerDemo() {
         intent = Intent(this, DaggerSharedPrefActivity::class.java)
         startActivity(intent)
@@ -100,14 +104,6 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
     private fun runDaggerDemo2() {
         intent = Intent(this, DaggerCheezyCodeActivity::class.java)
         startActivity(intent)
-    }
-    fun startScreen(className: Class<*>) {
-        val intent = Intent(this, className)
-        startActivity(intent)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }

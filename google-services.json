@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "678918424760",
+    "project_id": "androidarchdemo",
+    "storage_bucket": "androidarchdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678918424760:android:340a774256b0d58c9f4c4d",
+        "android_client_info": {
+          "package_name": "com.petofy.androidarchdemoprojects"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678918424760-tnss5afbtogieaq6el7g9udc5661rlea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petofy.androidarchdemoprojects",
+            "certificate_hash": "a27b9f004d52aa337f70aa300057b9dbeca5f2e7"
+          }
+        },
+        {
+          "client_id": "678918424760-1vr4v0oao2f37qihkrff71ad2ndeuhes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXdh0cu5-WhZJyK_tZd8s0617V3ROXmXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678918424760-1vr4v0oao2f37qihkrff71ad2ndeuhes.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

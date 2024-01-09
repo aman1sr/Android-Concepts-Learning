@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">TipTime</string>
+    <string name="app_name">AndroidArchDemoProjects</string>
+
     <string name="primary_color">Primary color</string>
     <string name="button">Button</string>
     <string name="secondary_color">Secondary color</string>
     <string name="email_icon">email icon</string>
+    <string name="default_web_client_id">678918424760-1vr4v0oao2f37qihkrff71ad2ndeuhes.apps.googleusercontent.com</string>
 </resources>
