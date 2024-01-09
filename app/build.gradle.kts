@@ -61,6 +61,7 @@ dependencies {
 
     implementation ("com.google.dagger:dagger:2.48")
     implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     kapt ("com.google.dagger:dagger-compiler:2.48")
 
     implementation("androidx.core:core-ktx:1.9.0")

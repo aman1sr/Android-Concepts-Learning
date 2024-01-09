@@ -7,10 +7,12 @@ import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
-import com.petofy.androidarchdemoprojects.firebase.FirebaseActivity
+import com.petofy.androidarchdemoprojects.firebase.FirebaseAuthActivity
+import com.petofy.androidarchdemoprojects.firebase.FirebaseHomeActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
+import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.firebase.setOnClickListener {
-            startScreen(FirebaseActivity::class.java)
+            startScreen(this,FirebaseHomeActivity::class.java)
         }
         binding.webView.setOnClickListener {
-            startScreen(HomeWebViewActivity::class.java)
+            startScreen(this,HomeWebViewActivity::class.java)
         }
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
@@ -47,12 +49,11 @@ class MainActivity : AppCompatActivity() {
             checkFlowConcept()
         }
         binding.arCore.setOnClickListener {
-            startScreen(ARCoreActivity::class.java)
+            startScreen(this,ARCoreActivity::class.java)
         }
         binding.lambda.setOnClickListener {
-            startScreen(RecHomeActivity::class.java)
+            startScreen(this,RecHomeActivity::class.java)
         }
-
 
 
     }
@@ -82,8 +83,5 @@ class MainActivity : AppCompatActivity() {
         intent = Intent(this, DaggerCheezyCodeActivity::class.java)
         startActivity(intent)
     }
-    fun startScreen(className: Class<*>) {
-        val intent = Intent(this, className)
-        startActivity(intent)
-    }
+
 }

@@ -25,21 +25,29 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.auth
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityFirebaseBinding
-import com.petofy.androidarchdemoprojects.databinding.ActivityFlowBinding
 import java.util.concurrent.TimeUnit
 
-class FirebaseActivity : AppCompatActivity() {
+/*
+* git off android-snippet (https://github.com/firebase/snippets-android/blob/990d7775346f5fc99c1f432f56ad0f23f106b2a9/auth/app/src/main/java/com/google/firebase/quickstart/auth/kotlin/PhoneAuthActivity.kt)
+* geek_for_geeks (https://www.geeksforgeeks.org/phone-number-verification-using-firebase-in-android/)
+* firebase_off_doc (https://firebase.google.com/docs/auth/android/phone-auth?authuser=0)
+*
+*
+* todo: check google Integrity API (https://developer.android.com/google/play/integrity/overview)
+* */
+class FirebaseAuthActivity : AppCompatActivity() {
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
 
-    private var storedVerificationId: String? = ""
+    private var storedVerificationId: String? = null
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
 
     // [END declare_auth]
     private lateinit var googleSignInClient: GoogleSignInClient
+
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
@@ -49,7 +57,7 @@ class FirebaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =ActivityFirebaseBinding.inflate(layoutInflater)
+        binding = ActivityFirebaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 // [START initialize_auth]
@@ -58,23 +66,52 @@ class FirebaseActivity : AppCompatActivity() {
 
         setSocialMediaLogin()
         phoneAuthVerification()
+        validateOtp()
 
+    }
+    private fun validateOtp() {
+        binding.btnSendOtp.setOnClickListener {
+            val otp : String? = binding.etOtp.text.toString().trim()
+            if (storedVerificationId == null) {
+                Toast.makeText(this, "Please 1st Ask for Otp from Your PHno", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            otp?.let {
+                val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                    storedVerificationId.toString(),it
+                )
+                signInWithCredential(credential)
+            }
+
+        }
+    }
+
+    private fun signInWithCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this){task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(this, "Invalid otp", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
     }
 
     private fun phoneAuthVerification() {
         binding.btnAskOtp.setOnClickListener {
-            val phoneNo  = binding.etPhone.text.toString()
+            val phoneNo = binding.etPhone.text.toString()
             if (phoneNo.length != 10) {
                 return@setOnClickListener
             }
             startPhoneNumberVerification(phoneNo)
         }
 
-        callbacks = object: PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 // This callback will be invoked in two situations:
-                // 1 - Instant verification. In some cases the phone number can be instantly
-                //     verified without needing to send or enter a verification code.
+                // 1 - todo: Instant verification. >> manually integrate the SMS Retriever API into your app,  detect and extract the verification code from the incoming SMS message.
                 // 2 - Auto-retrieval. On some devices Google Play services can automatically
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
@@ -82,7 +119,10 @@ class FirebaseActivity : AppCompatActivity() {
                 signInWithPhoneAuthCredential(credential)
             }
 
-            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
                 // The SMS verification code has been sent to the provided phone number, we
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
@@ -128,22 +168,24 @@ class FirebaseActivity : AppCompatActivity() {
                 }
             }
     }
-
+// todo: wrt country  add the initial no.
     private fun startPhoneNumberVerification(phoneNumber: String) {
+        val finalPhoneNO = "+91$phoneNumber"
+        Log.d(TAG, "PhoneNumber send: $finalPhoneNO")
+
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber("+1$phoneNumber")
+            .setPhoneNumber(finalPhoneNO)
             .setTimeout(60L, TimeUnit.SECONDS)
             .setActivity(this)
-            .setCallbacks(callbacks)
+            .setCallbacks(callbacks)            // in this callback will get the response, onCodeSend / onVerficationFailed / onVerificationCompleted
             .build()
 
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
     private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
-        val credential = PhoneAuthProvider.getCredential(verificationId!!,code)
+        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
     }
-
 
 
     private fun setSocialMediaLogin() {
@@ -204,8 +246,6 @@ class FirebaseActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         Log.d(TAG, "firebase USER:::::::::::::::: $user")
     }
-
-
 
 
     override fun onStart() {
