@@ -17,6 +17,10 @@ class FirebaseHomeActivity : AppCompatActivity() {
         binding.btnAuth.setOnClickListener {
             startScreen(this,FirebaseAuthActivity::class.java)
         }
+        binding.btnStorage.setOnClickListener {
+            startScreen(this,FirebaseStorageActivity::class.java)
+        }
+
 
     }
 }
