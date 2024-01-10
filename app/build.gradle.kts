@@ -40,6 +40,9 @@ buildFeatures{
 }
 
 dependencies {
+    implementation ("androidx.activity:activity:1.7.0")  // Latest stable for activity
+    implementation ("androidx.fragment:fragment:1.6.0")  // Latest stable for fragment
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 // Add the dependency for the Firebase Authentication library
