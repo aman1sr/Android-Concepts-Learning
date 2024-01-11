@@ -40,6 +40,7 @@ buildFeatures{
 }
 
 dependencies {
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 // Add the dependency for the Firebase Authentication library

@@ -34,7 +34,6 @@ class PermissionActivity : AppCompatActivity() {
             else ->  Toast.makeText(this, "Invalid stuff..", Toast.LENGTH_SHORT).show()
 
             }
-
         }
     }
 

@@ -9,6 +9,9 @@ import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 
 class FirebaseHomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityFirebase2Binding
+    companion object{
+        val TAG = "FirebaseHomeActivity_d"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFirebase2Binding.inflate(layoutInflater)
