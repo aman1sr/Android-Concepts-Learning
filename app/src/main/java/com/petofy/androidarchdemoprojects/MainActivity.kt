@@ -63,10 +63,7 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
             runDaggerDemo2()
         }
         binding.permission.setOnClickListener {
-            checkSimpleCameraPermission()
-        }
-        binding.permission2.setOnClickListener {
-            checkCameraLocationPermission()
+            startScreen(this,PermissionActivity::class.java)
         }
         binding.flow.setOnClickListener {
             checkFlowConcept()
@@ -92,11 +89,7 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
         intent.putExtra("type","double")
         startActivity(intent)
     }
-    private fun checkSimpleCameraPermission() {
-        intent = Intent(this, PermissionActivity::class.java)
-        intent.putExtra("type","single")
-        startActivity(intent)
-    }
+
     private fun runDaggerDemo() {
         intent = Intent(this, DaggerSharedPrefActivity::class.java)
         startActivity(intent)

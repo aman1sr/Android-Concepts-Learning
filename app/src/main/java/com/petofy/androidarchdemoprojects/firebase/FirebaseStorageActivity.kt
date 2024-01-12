@@ -20,7 +20,21 @@ import com.petofy.androidarchdemoprojects.databinding.ActivityFirebaseStorageBin
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-
+/* -------------------------------(https://firebase.google.com/docs/storage/android/upload-files)---------------------------
+ ---------------------------------(https://heartbeat.comet.ml/working-with-firebase-storage-in-android-part-1-a789f9eea037)-----------
+---------------------------------(https://www.geeksforgeeks.org/android-upload-an-image-on-firebase-storage-with-kotlin/)------------------
+*
+* putBytes() method is the simplest way to upload a file to Cloud Storage.
+*               akes a byte[] and returns an UploadTask that you can use to manage and monitor the status of the upload.
+*
+*todo: putStream()  (UPLOAD FROM STREAM)is the most versatile way to upload a file to Cloud Storage
+*               takes an InputStream and returns an UploadTask (https://firebase.google.com/docs/storage/android/upload-files#upload_from_a_stream)
+*
+* todo: putFile() (UPLOAD FROM LOCAL FILE) upload local files on the device, such as photos and videos from the camera
+*                   takes a File and returns an UploadTask  (https://firebase.google.com/docs/storage/android/upload-files#upload_from_a_local_file)
+*
+*
+* */
 class FirebaseStorageActivity : AppCompatActivity() {
     lateinit var binding: ActivityFirebaseStorageBinding
     lateinit var filePath: Uri
@@ -46,23 +60,38 @@ class FirebaseStorageActivity : AppCompatActivity() {
             progressBar.show()
             
             val storageRef = Firebase.storage.reference
-            val uploadTask = storageRef.child("file/$filePath").putFile(filePath)
-            // On success, download the file URL and display it
-            uploadTask.addOnSuccessListener {
-                // using glide library to display the image
-                storageRef.child("upload/$fileName").downloadUrl.addOnSuccessListener {
-                    Toast.makeText(this, "Download Comleted", Toast.LENGTH_SHORT).show()
-                    Log.d(FirebaseHomeActivity.TAG, "Download IMG URL: $it ")
-                    progressBar.dismiss()
-                }.addOnFailureListener {
-                    progressBar.dismiss()
-                    Toast.makeText(this, "Download Failed", Toast.LENGTH_SHORT).show()
-                }
-            }.addOnFailureListener {
-                progressBar.dismiss()
-                Toast.makeText(this, "Download Failed", Toast.LENGTH_SHORT).show()
+// where inside the  .child() we can specify the folder hierarchy &  $fileName is the actual Image name in the device
+            val ref = storageRef.child("image/$fileName")
+             val uploadTask =   ref.putFile(filePath)
+            uploadTask.addOnProgressListener {
+                val completePercent = ((it.bytesTransferred / it.totalByteCount) * 100).toInt()
+//                progressBar.progress = completePercent
+                Log.d(FirebaseHomeActivity.TAG, "upload completePercent: $completePercent ")
             }
-
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Image UPloaded Successfullly", Toast.LENGTH_SHORT).show()
+                    progressBar.dismiss()
+                }
+                .addOnFailureListener{
+                    Toast.makeText(this, "Oops!! Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+                // get the download URL (https://firebase.google.com/docs/storage/android/upload-files#get_a_download_url)
+                .continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    ref.downloadUrl
+                }.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        Toast.makeText(this, "Download Url!!: $downloadUri", Toast.LENGTH_SHORT).show()
+                        Log.d(FirebaseHomeActivity.TAG, "Download Url!!: $downloadUri")
+                    } else {
+                        Log.e(FirebaseHomeActivity.TAG, "Download URL failed", )
+                    }
+                }
         }
     }
 
@@ -97,7 +126,6 @@ class FirebaseStorageActivity : AppCompatActivity() {
             Log.d(FirebaseHomeActivity.TAG, "fileName : $fileName")
 
             try {
-
                 // Setting image on image view using Bitmap
                 val bitmap = MediaStore.Images.Media
                     .getBitmap(
@@ -127,8 +155,10 @@ class FirebaseStorageActivity : AppCompatActivity() {
         }
         Log.d(FirebaseHomeActivity.TAG, "getFileName-> uri.path: ${uri.path} ")
         Log.d(FirebaseHomeActivity.TAG, "uri.scheme: ${uri.scheme} ")
+
         return uri.path?.lastIndexOf('/').let {
             uri.path?.substring(it!!)
         }.toString()
     }
 }
+
