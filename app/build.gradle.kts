@@ -41,6 +41,11 @@ buildFeatures{
 
 dependencies {
 
+    val room_version = "2.6.0"  // Check for the latest version
+
+    implementation ("androidx.room:room-ktx:$room_version")
+    kapt ("androidx.room:room-compiler:$room_version")
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 // Add the dependency for the Firebase Authentication library

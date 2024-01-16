@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
@@ -13,11 +12,11 @@ import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActi
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
 import com.petofy.androidarchdemoprojects.dialog.DialogActivity
 import com.petofy.androidarchdemoprojects.theme.ThemeActivity
-import com.petofy.androidarchdemoprojects.firebase.FirebaseAuthActivity
 import com.petofy.androidarchdemoprojects.firebase.FirebaseHomeActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
+import com.petofy.androidarchdemoprojects.room.RoomHomeActivity
 import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
@@ -40,6 +39,9 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
 
         setContentView(binding.root)
 
+        binding.room.setOnClickListener {
+          startScreen(this,RoomHomeActivity::class.java)
+        }
         binding.theme.setOnClickListener {
           startScreen(this,ThemeActivity::class.java)
         }
