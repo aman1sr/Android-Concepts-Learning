@@ -2,48 +2,27 @@ package com.petofy.androidarchdemoprojects.room
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityHomeRoomBinding
-import kotlinx.coroutines.launch
+import com.petofy.androidarchdemoprojects.databinding.ActivityRoomHomeBinding
+import com.petofy.androidarchdemoprojects.room.curd.TodoActivity
+import com.petofy.androidarchdemoprojects.room.simple.RoomSimpleActivity
+import com.petofy.androidarchdemoprojects.utils.Utils
 
 class RoomHomeActivity : AppCompatActivity() {
-    lateinit var binding: ActivityHomeRoomBinding
-    companion object{
-        val TAG = "RoomHomeActivity_d"
-    }
+    lateinit var binding: ActivityRoomHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeRoomBinding.inflate(layoutInflater)
+        binding = ActivityRoomHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val database = getDatabase(this)
-        val viewModel = ViewModelProvider(this, BoxViewModel.FACTORY(database.boxDao))
-            .get(BoxViewModel::class.java)
-
-        binding.btnInsertData.setOnClickListener {
-            val name: String? = binding.editTextText.text.trim().toString()
-            binding.editTextText.setText("")
-            if (name == null || name == "") {
-                return@setOnClickListener
-            }
-            Toast.makeText(this, "Inserting Data", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "Boxer Obj :${Boxer(name,viewModel.boxerID)} ")
-            lifecycleScope.launch {
-                viewModel.insertBoxerData(Boxer(name,viewModel.boxerID))
-            }
+        binding.btnSimple.setOnClickListener {
+            Utils.startScreen(this, RoomSimpleActivity::class.java)
         }
-        viewModel.boxer.observe(this){name ->
-            name?.let {
-                binding.txtShowData.text = it
-            }
+        binding.btnTodoApp.setOnClickListener {
+            Utils.startScreen(this, TodoActivity::class.java)
         }
 
-        binding.btnFetchData.setOnClickListener {
-            binding.txtShowData.text = viewModel.extractBoxerDetail().toString()
-        }
+        
     }
 }

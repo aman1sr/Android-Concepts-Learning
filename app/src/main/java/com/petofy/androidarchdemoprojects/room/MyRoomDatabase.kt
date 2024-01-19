@@ -7,18 +7,18 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [Boxer::class], version = 1, exportSchema = false)
-abstract class BoxDatabase : RoomDatabase() {
+abstract class MyRoomDatabase : RoomDatabase() {
     abstract val boxDao : BoxDao
 }
-private lateinit var INSTANCE: BoxDatabase
+private lateinit var INSTANCE: MyRoomDatabase
 
-fun getDatabase(context: Context): BoxDatabase{
-    synchronized(BoxDatabase::class){
+fun getDatabase(context: Context): MyRoomDatabase{
+    synchronized(MyRoomDatabase::class){
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room
                 .databaseBuilder(
                     context.applicationContext,
-                    BoxDatabase::class.java,
+                    MyRoomDatabase::class.java,
                     "boxer_db"
                 )
                 .fallbackToDestructiveMigration()

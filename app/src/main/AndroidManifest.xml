@@ -31,6 +31,12 @@
             android:name=".room.RoomHomeActivity"
             android:exported="false" />
         <activity
+            android:name=".room.curd.TodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.simple.RoomSimpleActivity"
+            android:exported="false" />
+        <activity
             android:name=".firebase.FirebaseStorageActivity"
             android:exported="false" />
         <activity

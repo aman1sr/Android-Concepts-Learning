@@ -1,0 +1,64 @@
+package com.petofy.androidarchdemoprojects.room.curd
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.petofy.androidarchdemoprojects.R
+import com.petofy.androidarchdemoprojects.databinding.ActivityTodoBinding
+import com.petofy.androidarchdemoprojects.databinding.AlertDialogEtBinding
+
+class TodoActivity : AppCompatActivity() {
+    lateinit var binding: ActivityTodoBinding
+    lateinit var adapter : NoteListAdapter
+     var noteList = arrayListOf<Note>()
+    companion object{
+        val TAG = "ROOM_Todo_d"
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityTodoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.fab.setOnClickListener {
+            openNotesAlertDialog()
+        }
+        setRecview()
+
+
+
+
+    }
+
+    private fun setRecview() {
+        adapter = NoteListAdapter()
+        binding.recyclerview.adapter = adapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(this)
+
+    }
+
+    private fun openNotesAlertDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        builder.setTitle("Enter Your NOTES")
+        val bind = AlertDialogEtBinding.inflate(inflater)
+
+        /*
+        * Below line wasn't able to extract text & add in list on pressing OK btn because :::Access UI elements within their relevant event handlers to ensure they've been properly initialized and interacted with by the user.
+        * */
+//        val note = bind.etNote.text.toString()
+
+        builder.setView(bind.root)
+        builder.setPositiveButton("OK"){dialogInterface, i ->
+            val note = bind.etNote.text.toString()
+            noteList.add(Note(note))
+            Log.d(TAG, "editText note:$note ,,,,, noteList : ${noteList} ")
+
+            adapter.submitList(noteList)
+        }
+        builder.show()
+
+    }
+}

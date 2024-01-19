@@ -16,7 +16,8 @@
 ### contentProvider
 -  (https://www.geeksforgeeks.org/content-providers-in-android-with-example/)
 
-
+### AlertDialog one for all -- digital ocean
+-  (https://www.digitalocean.com/community/tutorials/android-alert-dialog-using-kotlin)
 ## UI >> buttons Animation
 -   my FAV retro NOTHING style (https://blog.canopas.com/20-button-effects-that-will-wow-your-users-ea415620a692#0549)
  Dotted Border Toggle on Hover

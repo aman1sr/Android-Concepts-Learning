@@ -1,8 +1,11 @@
-package com.petofy.androidarchdemoprojects.room
+package com.petofy.androidarchdemoprojects.room.simple
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import com.petofy.androidarchdemoprojects.room.BoxDao
+import com.petofy.androidarchdemoprojects.room.Boxer
+import com.petofy.androidarchdemoprojects.room.singleArgViewModelFactory
 
 class BoxViewModel(private val boxDao: BoxDao) : ViewModel() {
     var boxerID = 0
@@ -15,10 +18,11 @@ class BoxViewModel(private val boxDao: BoxDao) : ViewModel() {
         val FACTORY = singleArgViewModelFactory(::BoxViewModel)
     }
 val boxer: LiveData<String?> = boxDao.boxerLiveData.map { it?.name }
+//val boxer: LiveData<Boxer?> = boxDao.boxerLiveData
     suspend fun insertBoxerData(boxer: Boxer) {
         boxDao.insertBoxer(boxer)
         boxerID++
     }
-    fun extractBoxerDetail() : List<String>? = boxDao.boxerList.map { it?.name.toString() }
 
+    fun extractBoxerDetail() : List<String>? = boxDao.boxerList.map { it?.name.toString() }
 }

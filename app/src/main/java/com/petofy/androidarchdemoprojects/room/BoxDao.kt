@@ -17,6 +17,4 @@ interface BoxDao {
     @get:Query("select * from Boxer where id = 0")
     val boxerList : List<Boxer?>
 
-
-
 }
