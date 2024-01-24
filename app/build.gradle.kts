@@ -40,6 +40,7 @@ buildFeatures{
 }
 
 dependencies {
+    implementation("androidx.activity:activity-ktx:1.8.2")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))

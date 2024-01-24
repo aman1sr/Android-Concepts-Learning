@@ -19,6 +19,7 @@ import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
+import com.petofy.androidarchdemoprojects.viewModelLivedata.HomeVMActivity
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,9 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
 
         setContentView(binding.root)
 
+        binding.btnVmLivedata.setOnClickListener {
+          startScreen(this,HomeVMActivity::class.java)
+        }
         binding.theme.setOnClickListener {
           startScreen(this,ThemeActivity::class.java)
         }

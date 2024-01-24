@@ -35,7 +35,7 @@ public final class CameraPermissionHelper {
         == PackageManager.PERMISSION_GRANTED;
   }
 
-  /** Check to see we have the necessary permissions for this app, and ask for them if we don't. */
+  /** Check to see we have the necessary permissions for this app, and ask for them if we don't */
   public static void requestCameraPermission(Activity activity) {
     ActivityCompat.requestPermissions(
         activity, new String[] {CAMERA_PERMISSION}, CAMERA_PERMISSION_CODE);
