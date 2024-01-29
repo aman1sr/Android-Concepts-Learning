@@ -21,6 +21,7 @@ import com.petofy.androidarchdemoprojects.viewModelLivedata.custom.TestCustomVM
 
 // todo: LiveData (https://developer.android.com/topic/libraries/architecture/livedata)
 // SavedStateHandler : (https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-savedstate)
+// custom LiveData medium: (https://medium.com/androidiots/how-i-made-my-own-livedata-1faf4a45520)
 
 class HomeVMActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeVmactivityBinding
@@ -50,11 +51,34 @@ class HomeVMActivity : AppCompatActivity() {
         readLiveLocation()
         readSavedStateVM()
         readCustomLiveData()
+        readCustomLiveDataLifecycleAware()
+    }
+
+    private fun readCustomLiveDataLifecycleAware() {
+
     }
 
     private fun readCustomLiveData() {
-//        viewModelCustom.liveData.setValue("test2")
         Log.d(TAG2, "liveData:${viewModelCustom.liveData.getValue()} ")
+
+        viewModelCustom.liveData2.setValue("london")        // NOTE: liveData2 isn't able to observe data before observe{...}
+        viewModelCustom.liveData2.setValue("paris")
+        viewModelCustom.liveData2.setValue("zebra")
+        viewModelCustom.liveData2.observe {     // observing
+            Log.d(TAG2, "liveData2 Observing :${it} ")
+        }
+        viewModelCustom.liveData2.setValue("london2")
+        viewModelCustom.liveData2.setValue("paris2")
+        viewModelCustom.liveData2.setValue("zebra2")
+        binding.btnObserver.setOnClickListener {
+            viewModelCustom.liveData2.setValue(binding.nameEt.text.toString())   //  add read time data in Custom Livedata2
+        }
+        binding.btnRemoveObserver.setOnClickListener {  // todo: not working livedata2 removeObserve
+            viewModelCustom.liveData2.removeObserve {
+                Log.d(TAG2, "removeObserve::: $it ")
+            }
+        }
+
     }
 
     private fun readSavedStateVM() {

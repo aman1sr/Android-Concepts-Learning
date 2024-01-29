@@ -13,11 +13,9 @@ class Chronometer2ViewModel : ViewModel() {
      private val _isChromoStopped = MutableLiveData<Boolean>(false)
     val isChromoStopped: LiveData<Boolean> = _isChromoStopped
 
-//    lateinit var stuff : Int      // todo: why lateinit is showing error
+//    lateinit var stuff : Int           // todo: why lateinit is showing error
 
-    val mElapsedTime: MutableLiveData<Long> by lazy {
-        MutableLiveData<Long>()
-    }
+    val mElapsedTime by lazy { MutableLiveData<Long>() }
     fun getChromoClickState() : Boolean = _isChromoStopped.value!!
     fun setChromoClickstate(state: Boolean) {
         _isChromoStopped.value = state
