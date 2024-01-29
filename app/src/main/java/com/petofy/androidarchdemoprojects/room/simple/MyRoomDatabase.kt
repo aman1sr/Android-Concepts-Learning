@@ -1,4 +1,4 @@
-package com.petofy.androidarchdemoprojects.room
+package com.petofy.androidarchdemoprojects.room.simple
 
 import android.content.Context
 import androidx.room.Database
@@ -12,7 +12,7 @@ abstract class MyRoomDatabase : RoomDatabase() {
 }
 private lateinit var INSTANCE: MyRoomDatabase
 
-fun getDatabase(context: Context): MyRoomDatabase{
+fun getDatabase(context: Context): MyRoomDatabase {
     synchronized(MyRoomDatabase::class){
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room

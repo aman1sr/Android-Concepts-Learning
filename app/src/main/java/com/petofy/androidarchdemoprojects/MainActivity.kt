@@ -17,23 +17,32 @@ import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 import com.petofy.androidarchdemoprojects.room.RoomHomeActivity
+import com.petofy.androidarchdemoprojects.room.curd.TodoActivity
 import com.petofy.androidarchdemoprojects.room.simple.RoomSimpleActivity
 import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
-    companion object{
-       private val TAG= "HOME_SCREEN_ARCH_d"
+    companion object {
+        private val TAG = "HOME_SCREEN_ARCH_d"
         private val WEBVIEW_REQUEST_CODE = 101
         val INTENT_WEBVIEW_KEY = "INTENT_WEBVIEW_KEY"
     }
-val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
-    if (result.resultCode == Activity.RESULT_OK) {
-        val quizzReturnData = result.data?.getStringExtra(INTENT_WEBVIEW_KEY)
-        Log.d(TAG, "quizzReturnData:$quizzReturnData ")
+
+    val openHomeWebView =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val quizzReturnData = result.data?.getStringExtra(INTENT_WEBVIEW_KEY)
+                Log.d(TAG, "quizzReturnData:$quizzReturnData ")
+            }
+        }
+
+    private fun checkFlowConcept() {
+        intent = Intent(this, FlowActivity::class.java)
+        startActivity(intent)
     }
-}
-    lateinit var binding : ActivityMainBinding
+
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,23 +50,23 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
         setContentView(binding.root)
 
         binding.room.setOnClickListener {
-          startScreen(this, RoomHomeActivity::class.java)
+            startScreen(this, TodoActivity::class.java)     // todo: replace with RoomHomeActivity
         }
         binding.theme.setOnClickListener {
-          startScreen(this,ThemeActivity::class.java)
+            startScreen(this, ThemeActivity::class.java)
         }
         binding.webView.setOnClickListener {
             intent = Intent(this, HomeWebViewActivity::class.java)
             openHomeWebView.launch(intent)
         }
         binding.dialog.setOnClickListener {
-            startScreen(this,DialogActivity::class.java)
+            startScreen(this, DialogActivity::class.java)
         }
         binding.firebase.setOnClickListener {
-            startScreen(this,FirebaseHomeActivity::class.java)
+            startScreen(this, FirebaseHomeActivity::class.java)
         }
         binding.webView.setOnClickListener {
-            startScreen(this,HomeWebViewActivity::class.java)
+            startScreen(this, HomeWebViewActivity::class.java)
         }
         binding.daggerBasics.setOnClickListener {
             runDaggerDemo()
@@ -66,30 +75,24 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
             runDaggerDemo2()
         }
         binding.permission.setOnClickListener {
-            startScreen(this,PermissionActivity::class.java)
+            startScreen(this, PermissionActivity::class.java)
         }
         binding.flow.setOnClickListener {
             checkFlowConcept()
         }
         binding.arCore.setOnClickListener {
-            startScreen(this,ARCoreActivity::class.java)
+            startScreen(this, ARCoreActivity::class.java)
         }
         binding.lambda.setOnClickListener {
-            startScreen(this,RecHomeActivity::class.java)
+            startScreen(this, RecHomeActivity::class.java)
         }
 
 
     }
 
-
-
-    private fun checkFlowConcept() {
-        intent = Intent(this, FlowActivity::class.java)
-        startActivity(intent)
-    }
     private fun checkCameraLocationPermission() {
         intent = Intent(this, PermissionActivity::class.java)
-        intent.putExtra("type","double")
+        intent.putExtra("type", "double")
         startActivity(intent)
     }
 
@@ -97,6 +100,7 @@ val openHomeWebView = registerForActivityResult(ActivityResultContracts.StartAct
         intent = Intent(this, DaggerSharedPrefActivity::class.java)
         startActivity(intent)
     }
+
     private fun runDaggerDemo2() {
         intent = Intent(this, DaggerCheezyCodeActivity::class.java)
         startActivity(intent)

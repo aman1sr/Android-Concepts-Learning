@@ -1,4 +1,4 @@
-package com.petofy.androidarchdemoprojects.room
+package com.petofy.androidarchdemoprojects.room.simple
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

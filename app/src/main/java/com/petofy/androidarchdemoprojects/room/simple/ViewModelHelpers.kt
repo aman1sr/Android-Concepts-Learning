@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.petofy.androidarchdemoprojects.room
+package com.petofy.androidarchdemoprojects.room.simple
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

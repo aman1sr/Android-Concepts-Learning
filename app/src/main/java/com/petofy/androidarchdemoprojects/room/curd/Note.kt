@@ -1,4 +1,12 @@
 package com.petofy.androidarchdemoprojects.room.curd
 
-//todo: later make it data class
-data class Note(val note: String)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "note_table")
+ class Note(
+//    @PrimaryKey(autoGenerate = true) val id: Int,   todo: check (https://developer.android.com/codelabs/android-room-with-a-view-kotlin?hl=en#4)
+    @PrimaryKey
+    @ColumnInfo(name = "note") val note: String
+ )

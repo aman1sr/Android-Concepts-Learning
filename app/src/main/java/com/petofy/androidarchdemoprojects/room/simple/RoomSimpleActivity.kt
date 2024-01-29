@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.petofy.androidarchdemoprojects.databinding.ActivityHomeRoomBinding
-import com.petofy.androidarchdemoprojects.room.Boxer
-import com.petofy.androidarchdemoprojects.room.getDatabase
 import kotlinx.coroutines.launch
 
 /*

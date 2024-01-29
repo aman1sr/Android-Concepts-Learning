@@ -3,9 +3,6 @@ package com.petofy.androidarchdemoprojects.room.simple
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.petofy.androidarchdemoprojects.room.BoxDao
-import com.petofy.androidarchdemoprojects.room.Boxer
-import com.petofy.androidarchdemoprojects.room.singleArgViewModelFactory
 
 class BoxViewModel(private val boxDao: BoxDao) : ViewModel() {
     var boxerID = 0

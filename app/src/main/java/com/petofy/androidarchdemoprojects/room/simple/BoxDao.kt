@@ -1,4 +1,4 @@
-package com.petofy.androidarchdemoprojects.room
+package com.petofy.androidarchdemoprojects.room.simple
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
