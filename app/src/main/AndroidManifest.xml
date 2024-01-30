@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".room.curd.NoteApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -30,6 +31,15 @@
         tools:targetApi="31">
         <activity
             android:name=".viewModelLivedata.HomeVMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.RoomHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.curd.TodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".room.simple.RoomSimpleActivity"
             android:exported="false" />
         <activity
             android:name=".firebase.FirebaseStorageActivity"

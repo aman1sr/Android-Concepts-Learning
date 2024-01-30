@@ -18,12 +18,18 @@
             >
 
             <Button
-                android:id="@+id/btn_vm_livedata"
+                android:id="@+id/btnVmLivedata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="LiveData and VM" />
 
-                android:text="VM LiveData" />
+            <Button
+                android:id="@+id/room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="ROOM" />
 
             <Button
                 android:id="@+id/dialog"

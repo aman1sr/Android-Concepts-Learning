@@ -42,6 +42,28 @@ buildFeatures{
 dependencies {
     implementation("androidx.activity:activity-ktx:1.8.2")
 
+    val room_version = "2.6.0"  // Check for the latest version
+    val coroutines = "1.5.2"
+    val lifecycleVersion = "2.4.0"
+
+    // Room components
+    implementation ("androidx.room:room-ktx:$room_version")
+    kapt ("androidx.room:room-compiler:$room_version")
+
+    // Lifecycle components
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation ("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
+    implementation ("androidx.activity:activity-ktx:1.4.0")
+
+    // Kotlin components
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines")
+
+
+
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 // Add the dependency for the Firebase Authentication library
