@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,11 +15,15 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table ORDER BY note ASC")
     fun getAlphabetizedWords(): Flow<List<Note>>
+    @Query("SELECT * FROM note_table")
+    fun getNotes(): Flow<List<Note>>
 
     @Query("DELETE FROM note_table where id = :pos")      //todo: check, not working 90% of time
     suspend fun deleteAtPos(pos: Int)
     //        test vs bw ab & below
     @Delete
     suspend fun deleteNotePos(note: Note)
+    @Update
+    suspend fun update(note: Note)
 
 }

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.petofy.androidarchdemoprojects.R
 
 class NoteListAdapter : ListAdapter<Note, NoteListAdapter.NoteViewHolder>(WORDS_COMPARATOR) {
+    var noteItemLambda : ((pos: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder.create(parent)
@@ -34,6 +35,9 @@ class NoteListAdapter : ListAdapter<Note, NoteListAdapter.NoteViewHolder>(WORDS_
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.note)
+        holder.itemView.setOnClickListener {
+            noteItemLambda?.invoke(position)
+        }
     }
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

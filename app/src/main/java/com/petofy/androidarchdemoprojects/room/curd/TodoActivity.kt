@@ -33,14 +33,21 @@ class TodoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.fab.setOnClickListener {
-            openNotesAlertDialog()
+            openNotesAlertDialog(null)  // insert case
         }
         setRecview()
 
         observeNotes()
         itemSwipeDelete()
 
+        updateNoteLambdaClicked()
 
+    }
+
+    private fun updateNoteLambdaClicked() {
+        adapter.noteItemLambda = {
+            openNotesAlertDialog(it)
+        }
     }
 
     // itemSwipeDelete: (https://www.geeksforgeeks.org/android-swipe-to-delete-and-undo-in-recyclerview-with-kotlin/)
@@ -78,12 +85,17 @@ class TodoActivity : AppCompatActivity() {
 
     }
 
-    private fun openNotesAlertDialog() {
+    private fun openNotesAlertDialog(pos: Int?) {
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
         builder.setTitle("Enter Your NOTES")
         val bind = AlertDialogEtBinding.inflate(inflater)
 
+        pos?.let {pos ->
+            bind.etNote.setText(noteList?.get(pos)?.note?.toString())
+            bind.etDesc.setText(noteList?.get(pos)?.desc?.toString())
+            bind.etPriority.setText(noteList?.get(pos)?.priority?.toString())
+        }
         /*
         * Below line wasn't able to extract text & add in list on pressing OK btn because :::Access UI elements within their relevant event handlers to ensure they've been properly initialized and interacted with by the user.
         * */
@@ -98,8 +110,15 @@ class TodoActivity : AppCompatActivity() {
             if(etNote.isNullOrBlank() && priority.isNullOrBlank()) return@setPositiveButton
             if(etDesc.isNullOrBlank()) etDesc = null
             Log.d(TAG, "editText note:$etNote ,,,,, noteList : ${noteList} ")
-            val note = Note(etNote,etDesc,priority.toInt())
-            viewModel.insert(note)
+
+            if (pos == null) {  // insert case
+                val note = Note(etNote, etDesc, priority.toInt())
+                viewModel.insert(note)
+            } else {
+                val updateNote = Note(etNote, etDesc, priority.toInt(),noteList?.get(pos)?.id)
+                viewModel.updateNote(updateNote)
+            }
+
         }
         builder.show()
 
