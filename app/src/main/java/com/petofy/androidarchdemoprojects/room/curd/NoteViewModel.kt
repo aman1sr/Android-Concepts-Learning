@@ -13,6 +13,9 @@ class NoteViewModel(private val repository: NoteRepo) : ViewModel() {
     fun insert(note: Note) = viewModelScope.launch {
         repository.insert(note)
     }
+    fun deleteNote(note: Note) = viewModelScope.launch {
+        repository.deleteNote(note)
+    }
 
     class WordViewModelFactory(private val repository: NoteRepo) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

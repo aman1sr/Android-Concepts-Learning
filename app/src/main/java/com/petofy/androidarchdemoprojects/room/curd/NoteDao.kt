@@ -1,6 +1,7 @@
 package com.petofy.androidarchdemoprojects.room.curd
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,7 +15,10 @@ interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY note ASC")
     fun getAlphabetizedWords(): Flow<List<Note>>
 
-//    @Query("DELETE FROM word_table")
-//    suspend fun deleteAll()
+    @Query("DELETE FROM note_table where id = :pos")
+    suspend fun deleteAtPos(pos: Int)
+    //        test vs bw ab & below
+    @Delete
+    suspend fun deleteNotePos(note: Note)
 
 }

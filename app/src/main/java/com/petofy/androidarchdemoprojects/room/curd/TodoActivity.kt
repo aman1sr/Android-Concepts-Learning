@@ -17,7 +17,7 @@ import com.petofy.androidarchdemoprojects.databinding.AlertDialogEtBinding
 class TodoActivity : AppCompatActivity() {
     lateinit var binding: ActivityTodoBinding
     lateinit var adapter : NoteListAdapter
-     var noteList = arrayListOf<Note>()
+     var noteList : List<Note>? = null
     private val viewModel : NoteViewModel  by viewModels {
         NoteViewModel.WordViewModelFactory((application as NoteApplication).repository)
     }
@@ -52,7 +52,7 @@ class TodoActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.adapterPosition
-                adapter.notifyItemRemoved(pos)
+                viewModel.deleteNote(noteList?.get(pos)!!)
             }
         }).attachToRecyclerView(binding.recyclerview)
     }
@@ -60,6 +60,7 @@ class TodoActivity : AppCompatActivity() {
     private fun observeNotes() {
         viewModel.allNotes.observe(this, Observer { note ->
             note?.let {
+                noteList = it
                 adapter.submitList(it)
             }
         })

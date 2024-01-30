@@ -12,5 +12,12 @@ class NoteRepo(private val noteDao: NoteDao) {
         noteDao.insert(note)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteNote(note: Note){
+        noteDao.deleteNotePos(note)
+    }
+
+
 
 }
