@@ -15,7 +15,7 @@ interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY note ASC")
     fun getAlphabetizedWords(): Flow<List<Note>>
 
-    @Query("DELETE FROM note_table where id = :pos")
+    @Query("DELETE FROM note_table where id = :pos")      //todo: check, not working 90% of time
     suspend fun deleteAtPos(pos: Int)
     //        test vs bw ab & below
     @Delete

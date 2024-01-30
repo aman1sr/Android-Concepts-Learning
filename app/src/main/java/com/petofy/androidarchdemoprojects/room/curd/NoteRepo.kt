@@ -17,6 +17,11 @@ class NoteRepo(private val noteDao: NoteDao) {
     suspend fun deleteNote(note: Note){
         noteDao.deleteNotePos(note)
     }
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteByQuery(pos: Int){
+        noteDao.deleteAtPos(pos)
+    }
 
 
 

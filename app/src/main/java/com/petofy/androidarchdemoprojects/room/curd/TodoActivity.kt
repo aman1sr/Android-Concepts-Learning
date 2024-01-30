@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityTodoBinding
 import com.petofy.androidarchdemoprojects.databinding.AlertDialogEtBinding
-
+/*
+* room CURD operation (https://medium.com/huawei-developers/room-database-with-kotlin-mvvm-architecture-477c3ad3c264)
+*
+* */
 class TodoActivity : AppCompatActivity() {
     lateinit var binding: ActivityTodoBinding
     lateinit var adapter : NoteListAdapter
@@ -40,6 +43,7 @@ class TodoActivity : AppCompatActivity() {
 
     }
 
+    // itemSwipeDelete: (https://www.geeksforgeeks.org/android-swipe-to-delete-and-undo-in-recyclerview-with-kotlin/)
     private fun itemSwipeDelete() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -53,6 +57,7 @@ class TodoActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.adapterPosition
                 viewModel.deleteNote(noteList?.get(pos)!!)
+//                viewModel.deleteNotebyQuery(pos)
             }
         }).attachToRecyclerView(binding.recyclerview)
     }
