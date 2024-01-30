@@ -1,5 +1,8 @@
 ##TODO: 
 
+# ROOM : migration (https://medium.com/@pekwerike/handling-roomdb-migration-create-a-new-primary-key-column-in-an-existing-entity-f15d10932f5b)
+    - while still having some data on App, update few more columns
+
 ## check all views-widget-samples (https://github.com/android/views-widgets-samples/tree/main)
  - Recycler View ListAdapter -> https://github.com/android/views-widgets-samples/tree/main/RecyclerViewKotlin
     - 

@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.petofy.androidarchdemoprojects.R
 import com.petofy.androidarchdemoprojects.databinding.ActivityTodoBinding
 import com.petofy.androidarchdemoprojects.databinding.AlertDialogEtBinding
@@ -33,8 +35,26 @@ class TodoActivity : AppCompatActivity() {
         setRecview()
 
         observeNotes()
+        itemSwipeDelete()
 
 
+    }
+
+    private fun itemSwipeDelete() {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.adapterPosition
+                adapter.notifyItemRemoved(pos)
+            }
+        }).attachToRecyclerView(binding.recyclerview)
     }
 
     private fun observeNotes() {
@@ -66,9 +86,13 @@ class TodoActivity : AppCompatActivity() {
         builder.setView(bind.root)
         builder.setPositiveButton("OK"){dialogInterface, i ->
             val etNote = bind.etNote.text.toString()
-//            noteList.add(Note(note))
+            var etDesc : String?  = bind.etDesc.text.toString()
+            val priority = bind.etPriority.text.toString()
+
+            if(etNote.isNullOrBlank() && priority.isNullOrBlank()) return@setPositiveButton
+            if(etDesc.isNullOrBlank()) etDesc = null
             Log.d(TAG, "editText note:$etNote ,,,,, noteList : ${noteList} ")
-            val note = Note(etNote)
+            val note = Note(etNote,etDesc,priority.toInt())
             viewModel.insert(note)
         }
         builder.show()
