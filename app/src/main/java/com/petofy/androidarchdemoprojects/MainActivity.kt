@@ -17,10 +17,9 @@ import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 import com.petofy.androidarchdemoprojects.room.RoomHomeActivity
-import com.petofy.androidarchdemoprojects.room.curd.TodoActivity
-import com.petofy.androidarchdemoprojects.room.simple.RoomSimpleActivity
 import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
 import com.petofy.androidarchdemoprojects.viewModelLivedata.HomeVMActivity
+import com.petofy.androidarchdemoprojects.webSocket.WebSocketServerActivity
 import com.petofy.androidarchdemoprojects.webview.HomeWebViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.btnWebsocketServer.setOnClickListener {
+            startScreen(this, WebSocketServerActivity::class.java)
+        }
+        binding.btnWebsocketClient.setOnClickListener {
+//            startScreen(this, WebSocketServerActivity::class.java)
+        }
         binding.btnVmLivedata.setOnClickListener {
             startScreen(this, HomeVMActivity::class.java)
         }

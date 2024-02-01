@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "note_table")
   class Note(
-//    @PrimaryKey(autoGenerate = true) val id: Int,   //todo: check (https://developer.android.com/codelabs/android-room-with-a-view-kotlin?hl=en#4)
     @ColumnInfo(name = "note") val note: String,
     @ColumnInfo(name = "description") val desc: String?,
     @ColumnInfo(name = "priority") val priority: Int,

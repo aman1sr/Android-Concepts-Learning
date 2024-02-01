@@ -30,6 +30,9 @@
         android:theme="@style/Theme.AndroidArchDemoProjects"
         tools:targetApi="31">
         <activity
+            android:name=".webSocket.WebSocketServerActivity"
+            android:exported="false" />
+        <activity
             android:name=".viewModelLivedata.HomeVMActivity"
             android:exported="false" />
         <activity

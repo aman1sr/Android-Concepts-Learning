@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)   // strategy ignores a new word if it's exactly the same as one already in the list. (https://developer.android.com/reference/androidx/room/OnConflictStrategy.html)
     suspend fun insert(note: Note)
 
     @Query("SELECT * FROM note_table ORDER BY note ASC")
