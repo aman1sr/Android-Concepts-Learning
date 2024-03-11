@@ -18,6 +18,27 @@
             >
 
             <Button
+                android:id="@+id/btn_ml2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="ML : vedio recognise" />
+
+            <Button
+                android:id="@+id/btn_ml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="ML : Bird recognise" />
+
+            <Button
+                android:id="@+id/btn_config_changes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="Config Change" />
+
+            <Button
                 android:id="@+id/btn_websocket_server"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

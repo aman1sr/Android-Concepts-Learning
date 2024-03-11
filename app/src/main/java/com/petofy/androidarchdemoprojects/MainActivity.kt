@@ -15,6 +15,9 @@ import com.petofy.androidarchdemoprojects.theme.ThemeActivity
 import com.petofy.androidarchdemoprojects.firebase.FirebaseHomeActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
+import com.petofy.androidarchdemoprojects.ml.BirdClassifyMLActivity
+import com.petofy.androidarchdemoprojects.ml.MovinetActivity
+import com.petofy.androidarchdemoprojects.other.ConfigChangeActivity
 import com.petofy.androidarchdemoprojects.permission.PermissionActivity
 import com.petofy.androidarchdemoprojects.room.RoomHomeActivity
 import com.petofy.androidarchdemoprojects.utils.Utils.startScreen
@@ -49,6 +52,15 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.btnMl2.setOnClickListener {
+            startScreen(this, MovinetActivity::class.java)
+        }
+        binding.btnMl.setOnClickListener {
+            startScreen(this, BirdClassifyMLActivity::class.java)
+        }
+        binding.btnConfigChanges.setOnClickListener {
+            startScreen(this, ConfigChangeActivity::class.java)
+        }
         binding.btnWebsocketServer.setOnClickListener {
             startScreen(this, WebSocketServerActivity::class.java)
         }
