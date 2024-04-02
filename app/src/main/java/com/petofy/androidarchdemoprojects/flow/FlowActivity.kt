@@ -26,7 +26,10 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
-
+/*
+* Flow 101 proDev (https://proandroiddev.com/kotlin-flows-in-android-summary-8e092040fb3a)
+* amitShekhar git (https://github.com/amitshekhariitbhu/Learn-Kotlin-Flow)
+* */
 class FlowActivity : AppCompatActivity() {
     companion object{
         val TAG = "FlowActivity_d"
@@ -318,7 +321,6 @@ class FlowActivity : AppCompatActivity() {
                 Log.d(TAG, " consumed_d1: ${it.toString()}")
             }
         }
-
     }
 
 

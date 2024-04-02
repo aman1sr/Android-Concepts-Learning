@@ -7,4 +7,6 @@ class NoteApplication : Application() {
     // rather than when the application starts
     val database by lazy { WordRoomDatabase.getDatabase(this) }
     val repository by lazy { NoteRepo(database.noteDao()) }
+
+
 }

@@ -10,15 +10,12 @@ import javax.inject.Inject
 class DaggerSharedPrefActivity : AppCompatActivity() {
     lateinit var binding : ActivityDaggerSharedPrefBinding
 
-//    @Inject
-//    lateinit var sharedPreferences : SharedPreferences
-//    private lateinit var sharedPreferenceComponent: SharedPreferenceComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDaggerSharedPrefBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+// now my feeling very good and energetic
         binding.saveBtn.setOnClickListener {
             saveInputField()
         }
@@ -26,7 +23,6 @@ class DaggerSharedPrefActivity : AppCompatActivity() {
             displaySavedField()
         }
 
-//        sharedPreferenceComponent =
 
 
     }

@@ -4,11 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,16 +33,30 @@ class DemoComposeList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column {
+
+            // NOTE: alternative to RecyclerView in Jetpack Compose
+            LazyColumn(content = {
+                items(getCategoryList()) { item ->
+                    BlogCategory(img = item.img, title = item.title, desc = item.desc)
+                }
+            })
+
+
+
+            // NOTE: Column doesn't have def state of scrolling, can acheive it as : rememberScrollState
+            //      disAdv: will render all item at once, can't recycle
+ /*             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 getCategoryList().map {
                     BlogCategory(img = it.img, title = it.title, desc = it.desc)
                 }
             }
+*/
+
         }
     }
 }
 
-@Preview
+@Preview(heightDp = 500)
 @Composable
 fun BlogCategory(img: Int, title: String, desc: String) {
     Card(
@@ -77,9 +96,20 @@ data class Category(val img: Int, val title: String, val desc: String)
 
 fun getCategoryList(): MutableList<Category> {
     val list = mutableListOf<Category>()
+
+    list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
     list.add(Category(R.drawable.ic_account, "Programming","kotlin, java, c++"))
     list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
+
+    list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
     list.add(Category(R.drawable.ic_account, "Programming","ruby, dart"))
+    list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
+
+    list.add(Category(R.drawable.ic_arrow, "Programming","html, css"))
+    list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
+
+    list.add(Category(R.drawable.ic_arrow, "Programming","html, css"))
+    list.add(Category(R.drawable.ic_fav, "Programming","js, python, go"))
     list.add(Category(R.drawable.ic_arrow, "Programming","html, css"))
 
     return list

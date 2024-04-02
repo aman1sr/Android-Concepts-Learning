@@ -15,7 +15,6 @@ import com.petofy.androidarchdemoprojects.databinding.ActivityTodoBinding
 import com.petofy.androidarchdemoprojects.databinding.AlertDialogEtBinding
 /*
 * room CURD operation (https://medium.com/huawei-developers/room-database-with-kotlin-mvvm-architecture-477c3ad3c264)
-*
 * */
 class TodoActivity : AppCompatActivity() {
     lateinit var binding: ActivityTodoBinding
@@ -41,7 +40,6 @@ class TodoActivity : AppCompatActivity() {
         itemSwipeDelete()
 
         updateNoteLambdaClicked()
-
     }
 
     private fun updateNoteLambdaClicked() {
