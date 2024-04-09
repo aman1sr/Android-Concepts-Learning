@@ -78,6 +78,7 @@ class FlowActivity : AppCompatActivity() {
         binding.exceptionHandlingFlow.setOnClickListener {
             exceptionHandling()
         }
+// NOTE: hot vs cold  (https://g.co/gemini/share/cd6b4e1c0deb)
 
         binding.hotSharedFlow.setOnClickListener {
             hotSharedFlowEx()
@@ -181,7 +182,7 @@ class FlowActivity : AppCompatActivity() {
             try {
                 producer3()
                     .collect {
-                        Log.d(TAG, "Collected thread: ${Thread.currentThread().name}")
+                        Log.d(TAG, "$it, Collected thread: ${Thread.currentThread().name}")
                     }
             } catch (e: Exception) {
                 Log.d(TAG, "${e.message.toString()}")
@@ -324,9 +325,8 @@ class FlowActivity : AppCompatActivity() {
     }
 
 
-
-    private fun basicFlowConsuming() {
-        GlobalScope.launch {
+    private fun basicFlowConsuming() {         //COLD FLOW  why becuase - it sense the data generation logic only executes on demand when a collector starts listening.(https://g.co/gemini/share/13e9df3d64a4)
+        GlobalScope.launch {            // unlike HOT Flow - Starts when the flow is created, can emit before collectors
             val data: Flow<Int> = producer()
             data.collect {
                 Log.d(TAG, " consumed_d2: ${it.toString()}")
@@ -357,8 +357,9 @@ class FlowActivity : AppCompatActivity() {
             list.forEach {
                 delay(1000)
                 Log.d(TAG, "emitter thread - ${Thread.currentThread().name}")
+                if(it==4)throw Exception("Error in Emitter")
                 emit(it)
-                throw Exception("Error in Emitter")
+
             }
         }.catch {       // to handle the producer Exception seperately, + could handle emit also
             Log.e(TAG, "Emitter catch: ${it.message}", )

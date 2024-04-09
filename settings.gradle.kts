@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidArchDemoProjects"
 include(":app")
+include(":mylibrary")

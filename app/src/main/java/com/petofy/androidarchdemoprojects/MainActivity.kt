@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import com.aman.mylibrary.JetpackBaseActivity
 import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
@@ -14,6 +15,7 @@ import com.petofy.androidarchdemoprojects.dialog.DialogActivity
 import com.petofy.androidarchdemoprojects.theme.ThemeActivity
 import com.petofy.androidarchdemoprojects.firebase.FirebaseHomeActivity
 import com.petofy.androidarchdemoprojects.flow.FlowActivity
+import com.petofy.androidarchdemoprojects.flow.FlowKodecoActivity
 import com.petofy.androidarchdemoprojects.lambda.RecHomeActivity
 import com.petofy.androidarchdemoprojects.ml.BirdClassifyMLActivity
 import com.petofy.androidarchdemoprojects.ml.MovinetActivity
@@ -52,6 +54,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.btnJetpack.setOnClickListener {
+            startScreen(this, JetpackBaseActivity::class.java)
+        }
         binding.btnMl2.setOnClickListener {
             startScreen(this, MovinetActivity::class.java)
         }
@@ -102,6 +107,9 @@ class MainActivity : AppCompatActivity() {
         binding.flow.setOnClickListener {
             checkFlowConcept()
         }
+        binding.flow2.setOnClickListener {
+            checkFlow2Concept()
+        }
         binding.arCore.setOnClickListener {
             startScreen(this, ARCoreActivity::class.java)
         }
@@ -110,6 +118,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun checkFlow2Concept() {
+        startScreen(this, FlowKodecoActivity::class.java)
     }
 
     private fun checkCameraLocationPermission() {
