@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidArchDemoProjects"
 include(":app")
-include(":mylibrary")
+include(":compose")
+include(":firebase")
+include(":kotlinApi")

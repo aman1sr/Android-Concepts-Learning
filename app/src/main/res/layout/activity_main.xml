@@ -18,6 +18,20 @@
             >
 
             <Button
+                android:id="@+id/btn_compose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="COMPOSE MODULE" />
+
+            <Button
+                android:id="@+id/btn_check2API"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                android:text="await 2 API" />
+
+            <Button
                 android:id="@+id/btn_jetpack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

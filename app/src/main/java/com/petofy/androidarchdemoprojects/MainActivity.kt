@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.aman.mylibrary.JetpackBaseActivity
 import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
+import com.petofy.androidarchdemoprojects.coroutine.CoroutineHomeActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
 import com.petofy.androidarchdemoprojects.databinding.ActivityMainBinding
@@ -54,6 +55,12 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.btnCompose.setOnClickListener {
+            startScreen(this, JetpackBaseActivity::class.java)
+        }
+        binding.btnCheck2API.setOnClickListener {
+            startScreen(this, CoroutineHomeActivity::class.java)
+        }
         binding.btnJetpack.setOnClickListener {
             startScreen(this, JetpackBaseActivity::class.java)
         }

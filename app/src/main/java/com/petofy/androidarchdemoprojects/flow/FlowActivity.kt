@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -55,9 +54,15 @@ class FlowActivity : AppCompatActivity() {
             actionsOfFlow()
         }
       binding.terminalOperatorFlow.setOnClickListener {
+          /*
+          * Terminal operators initiate the actual collection of items emitted by a Kotlin Flow. They mark the end of a flow processing pipeline and produce a result or side effect.
+          * */
           terminalOperator()
       }
       binding.nonTerminalOperatorFlow.setOnClickListener {
+          /*
+          * Non-terminal operators transform or modify an existing Kotlin Flow, creating a new Flow as a result. They act like steps in a processing chain.
+          * */
           nonTerminalOperator()
       }
       binding.filteredDataClassFlow.setOnClickListener {
@@ -78,37 +83,41 @@ class FlowActivity : AppCompatActivity() {
         binding.exceptionHandlingFlow.setOnClickListener {
             exceptionHandling()
         }
-// NOTE: hot vs cold  (https://g.co/gemini/share/cd6b4e1c0deb)
 
+// NOTE: hot vs cold  (https://g.co/gemini/share/cd6b4e1c0deb)
+        /*
+        * Shared & State can have multiple consumer
+        * Shared doesn't need to have def value
+        * State need def value & it retain the last state value emitted
+        *
+        * */
         binding.hotSharedFlow.setOnClickListener {
-            hotSharedFlowEx()
+            checkSharedFlow()           // shared Flow when emits value, which are being read by mutliple consumer,, doesn't care if they are late,,skipped is skipped
         }
 
         binding.hotStateFlow.setOnClickListener {
-            hotStateFlowEx()
+            checkStateFlow()            //
         }
-
-
-
-
-
     }
 
-    private fun hotStateFlowEx() {
+
+
+    private fun checkStateFlow() {
         GlobalScope.launch {
             val result = stateFlowProducer()
             delay(1500)
             result.collect{
-                Log.d(TAG, "CollectedFlowItem: $it")
+                Log.d(TAG, "CollectedFlowItem1: $it")
 //                Log.d(TAG, "result: ${result.value}")     // can't access the MutableStateFlow def value, becuase return type is Flow<Int>
             }
         }
 
             GlobalScope.launch {
             val result = stateFlowProducer2()
-            delay(1500)
+//            val result = stateFlowProducer()
+            delay(6000)                     // here delay time 6s is > delay stateFlowProducer2() 4s ,, but last state of value will is retained and will get showed
             result.collect{
-                Log.d(TAG, "CollectedStateFlowItem: $it")
+                Log.d(TAG, "CollectedStateFlowItem2: $it")
                 Log.d(TAG, "result: ${result.value}")     // could access the StateFlow value, becuase, return type is StateFlow<Int>
             }
         }
@@ -116,7 +125,7 @@ class FlowActivity : AppCompatActivity() {
 
     }
 
-    private fun hotSharedFlowEx() {
+    private fun checkSharedFlow() {
         GlobalScope.launch {
             val result = sharedFlowProducer()
             result.collect {
@@ -155,10 +164,11 @@ class FlowActivity : AppCompatActivity() {
     private fun stateFlowProducer(): Flow<Int> {
         val mutableStateFlow = MutableStateFlow(10)
         GlobalScope.launch {
-            delay(2000)
-            mutableStateFlow.emit(20)
-            delay(2000)
-            mutableStateFlow.emit(30)
+            val list = listOf<Int>(11, 22, 33, 44, 55)
+            list.forEach {
+                mutableStateFlow.emit(it)
+                delay(1000)
+            }
         }
         return mutableStateFlow
     }

@@ -109,14 +109,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_top"
 
-        android:text="Hot Shared in Flow" />
+        android:text="Shared Flow" />
    <Button
         android:id="@+id/hotStateFlow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/btn_margin_top"
 
-        android:text="Hot State in Flow" />
+        android:text="State Flow" />
 
 
 

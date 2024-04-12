@@ -33,6 +33,7 @@ public class TestStaticVM2Activity extends AppCompatActivity {
         }
 
 
+
         /*why isn't possible: (https://g.co/gemini/share/1497f5fa033e)*/
 //        TestStaticVM1Activity obj = new TestStaticVM1Activity();
 //        TestStaticViewModel vm =  obj.getSharedViewModel();
