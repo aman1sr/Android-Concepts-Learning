@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <application>
         <activity
-            android:name=".JetpackBaseActivity"
+            android:name=".list.GridListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_grid_list"
+            android:theme="@style/Theme.AndroidArchDemoProjects" />
+        <activity
+            android:name=".ScaffoldActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scaffold"
+            android:theme="@style/Theme.AndroidArchDemoProjects" />
+        <activity
+            android:name=".GridListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_grid_list"
+            android:theme="@style/Theme.AndroidArchDemoProjects" />
+        <activity
+            android:name=".list.JetpackBaseActivity"
             android:exported="true"
             android:label="@string/title_activity_jetpack_base"
             android:theme="@style/Theme.AndroidArchDemoProjects" />

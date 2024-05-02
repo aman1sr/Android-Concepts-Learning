@@ -1,4 +1,4 @@
-package com.aman.mylibrary
+package com.aman.mylibrary.list
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,10 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aman.mylibrary.R
+import com.aman.mylibrary.model.Item
 import com.aman.mylibrary.ui.theme.AndroidArchDemoProjectsTheme
-
+/*
+* scrollable list using compose (https://developer.android.com/codelabs/basic-android-kotlin-compose-training-add-scrollable-list?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-3-pathway-2%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-training-add-scrollable-list#0)
+* */
 class JetpackBaseActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class JetpackBaseActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     LazyColumn{
-                        items(loadAffirmations()){item->
+                        items(loadAffirmations()){ item->
                             listItem(item = item, modifier = Modifier.padding(5.dp))
                         }
                     }
@@ -42,14 +45,15 @@ class JetpackBaseActivity : ComponentActivity() {
         }
     }
 }
+
 fun loadAffirmations(): List<Item>{
     return listOf<Item>(
-        Item("abc",R.drawable.pacquiao),
-        Item("xxx",R.drawable.pacquiao),
-        Item("sddd",R.drawable.pacquiao),
-        Item("as",R.drawable.pacquiao),
-        Item("asdf",R.drawable.pacquiao),
-        Item("sd",R.drawable.pacquiao)
+        Item("abc", R.drawable.pacquiao),
+        Item("xxx", R.drawable.pacquiao),
+        Item("sddd", R.drawable.pacquiao),
+        Item("as", R.drawable.pacquiao),
+        Item("asdf", R.drawable.pacquiao),
+        Item("sd", R.drawable.pacquiao)
     )
 }
 
@@ -64,7 +68,7 @@ fun listItem(item: Item, modifier: Modifier) {
 
         )
         Text(text = item.desc,
-            modifier = Modifier.padding(5.dp),
+            modifier = modifier,
             style = MaterialTheme.typography.headlineMedium
             )
     }

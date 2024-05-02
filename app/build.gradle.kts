@@ -56,6 +56,9 @@ buildFeatures{
 }
 
 dependencies {
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
+
     // Tensorflow Lite dependencies
 
     implementation("androidx.activity:activity-ktx:1.8.2")

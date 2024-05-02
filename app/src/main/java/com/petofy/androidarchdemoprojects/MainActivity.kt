@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
-import com.aman.mylibrary.JetpackBaseActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.aman.mylibrary.list.JetpackBaseActivity
 import com.petofy.androidarchdemoprojects.arcore.ARCoreActivity
+import com.petofy.androidarchdemoprojects.br.AeroplaneBRActivity
 import com.petofy.androidarchdemoprojects.coroutine.CoroutineHomeActivity
 import com.petofy.androidarchdemoprojects.dagger.cheezyCode.DaggerCheezyCodeActivity
 import com.petofy.androidarchdemoprojects.dagger.sharedpref.DaggerSharedPrefActivity
@@ -50,10 +52,16 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        binding.btnBR.setOnClickListener {
+            startScreen(this, AeroplaneBRActivity::class.java)
+        }
 
         binding.btnCompose.setOnClickListener {
             startScreen(this, JetpackBaseActivity::class.java)
